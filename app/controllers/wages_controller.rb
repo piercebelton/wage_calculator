@@ -66,7 +66,13 @@ class WagesController < ApplicationController
   end
 
   def billable(wage)
-    (wage.hours * wage.hourly_rate) + ((wage.minutes / 60.0) * wage.hourly_rate)
+    billable_wages = 0
+    if (wage.hours != nil)
+      billable_wages += (wage.hours * wage.hourly_rate)
+    end
+    if (wage.minutes != nil)
+      billable_wages += ((wage.minutes / 60.0) * wage.hourly_rate)
+    end
   end
 
   private
